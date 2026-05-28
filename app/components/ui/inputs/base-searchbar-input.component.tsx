@@ -3,7 +3,7 @@ import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { COLORS } from '$constants/colors.constants'
 import { useAppTheme, useDebounce } from '$hooks/common';
-import { Search, X } from 'lucide-react-native';
+import { ListFilter, Search, X } from 'lucide-react-native';
 import { ITheme } from '$types/theme.types';;
 import { IconButton } from '../buttons';
 
@@ -40,7 +40,7 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>(({
 
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
     const [search, setSearch] = React.useState(value || '');
-    const debouncedSearch = useDebounce(search);
+    const debouncedSearch = useDebounce(search, 300);
 
     React.useImperativeHandle(ref, () => ({
         clear: () => {
@@ -63,7 +63,7 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>(({
     return (
         <View style={[styles.container, isFocused && { borderColor: colors['brand-primary'] }, containerStyle]}>
             <View style={styles.icon}>
-                <Search width={moderateScale(24)} height={moderateScale(24)} color={colors['icon-default']} />
+                <Search size={moderateScale(24)} color={colors['icon-default']} />
             </View>
             <View style={{ flex: 1, height: '100%' }}>
                 <TextInput
@@ -96,15 +96,9 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>(({
                     }}
                 />
             </View>
-            {search.length > 0 && (
-                <IconButton
-                    onPress={handleClear}
-                    style={styles.icon}
-                    accessibilityLabel="Clear search"
-                >
-                    <X width={moderateScale(20)} height={moderateScale(20)} color={colors['icon-default']} />
-                </IconButton>
-            )}
+            <IconButton style={styles.icon}>
+                <ListFilter size={moderateScale(24)} color={colors['icon-default']} />
+            </IconButton>
         </View>
     )
 })
@@ -117,8 +111,6 @@ const styling = (theme: ITheme) => StyleSheet.create({
         height: moderateScale(50),
         borderRadius: moderateScale(8),
         backgroundColor: COLORS[theme]['surface-alt'],
-        paddingLeft: moderateScale(12),
-        gap: moderateScale(10),
         borderWidth: moderateScale(1),
         borderColor: COLORS[theme].border,
         flexDirection: 'row',
@@ -128,7 +120,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     icon: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: moderateScale(4)
+        paddingHorizontal: moderateScale(12)
     },
     input: {
         flex: 1,

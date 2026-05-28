@@ -1,12 +1,10 @@
 import React, { useRef, useState, useMemo, useCallback } from 'react';
 import { BottomTabStackScreenProps } from '$types/navigation.types';
 import { EBottomScreens } from '$constants/screen.constants';
-import { ThemedView } from '$components/ui';
 import { TabHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
-import { useAnimatedValue, View, ActivityIndicator } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View, ActivityIndicator, Animated } from 'react-native';
 import { Character, CharacterSkeleton } from '$components/layout';
 import { CharacterFilterModal } from '$components/modals';
 import { EmptyCharactersStatePage } from '$components/pages';
@@ -16,10 +14,26 @@ import { moderateScale } from '$constants/styles.constants';
 
 const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>> = () => {
 
-    const { theme, insets, colors } = useAppTheme();
+    const { theme, colors, insets } = useAppTheme();
     const styles = styling(theme, insets);
 
-    const scrollY = useAnimatedValue(0);
+    const [headerHeight, setHeaderHeight] = useState(moderateScale(130));
+
+    const scrollY = useRef(new Animated.Value(0)).current;
+
+    const positiveScrollY = scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: 'clamp',
+    });
+
+    const diffClampScrollY = Animated.diffClamp(positiveScrollY, 0, headerHeight);
+
+    const headerTranslateY = diffClampScrollY.interpolate({
+        inputRange: [0, headerHeight],
+        outputRange: [0, -headerHeight],
+        extrapolate: 'clamp',
+    });
 
     const modalRef = useRef<SheetModalRef>(null);
 
@@ -46,57 +60,82 @@ const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>>
     }, [isFetchingNextPage, isLoading]);
 
     return (
-        <ThemedView>
-            <TabHeader
-                onPressFilter={() => modalRef.current?.open()}
-                onChangeSearch={setSearch}
-                hasSearchBar
-                headerText='Characters'
-                theme={theme}
-            />
-            <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
 
-                <FlatList
-                    data={characters}
-                    keyExtractor={(item, idx) => `${item.id}-${idx}`}
-                    contentContainerStyle={styles.contentContainer}
-                    scrollEventThrottle={16}
-                    initialNumToRender={20}
-                    maxToRenderPerBatch={10}
-                    renderItem={({ item }) => <Character character={item} theme={theme} />}
-                    ListEmptyComponent={() => {
-                        if (isLoading && !isFetchingNextPage) {
-                            return (
-                                <View style={{ gap: moderateScale(12) }}>
-                                    {[...Array(5)].map((_, i) => (
-                                        <CharacterSkeleton key={`skeleton-${i}`} theme={theme} />
-                                    ))}
-                                </View>
-                            );
-                        }
-                        if (!isLoading && !isFetchingNextPage) {
-                            return <EmptyCharactersStatePage />;
-                        }
-                        return null;
-                    }}
-                    onEndReached={() => {
-                        if (hasNextPage && !isFetchingNextPage) {
-                            fetchNextPage();
-                        }
-                    }}
-                    onEndReachedThreshold={0.5}
-                    ListFooterComponent={renderFooter}
-                    onRefresh={refetch}
+            <View style={{ height: insets.top, backgroundColor: colors.border, position: 'absolute', top: 0, left: 0, right: 0, zIndex: 11 }} />
+
+            <Animated.View
+                style={[
+                    {
+                        position: 'absolute',
+                        top: insets.top,
+                        left: 0,
+                        right: 0,
+                        zIndex: 10,
+                        backgroundColor: colors.border,
+                        transform: [{ translateY: headerTranslateY }]
+                    }
+                ]}
+                onLayout={(e) => setHeaderHeight(e.nativeEvent.layout.height)}
+            >
+                <TabHeader
+                    onPressFilter={() => modalRef.current?.open()}
+                    onChangeSearch={setSearch}
+                    hasSearchBar
+                    headerText='Characters'
+                    theme={theme}
                 />
+            </Animated.View>
 
-            </View>
+            <Animated.FlatList
+                data={characters}
+                keyExtractor={(item, idx) => `${item.id}-${idx}`}
+                contentContainerStyle={{
+                    paddingTop: headerHeight + insets.top + moderateScale(10),
+                    paddingBottom: moderateScale(100) + insets.bottom,
+                    paddingHorizontal: moderateScale(20),
+                    gap: moderateScale(12)
+                }}
+                scrollEventThrottle={16}
+                onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                    { useNativeDriver: true }
+                )}
+                initialNumToRender={20}
+                maxToRenderPerBatch={10}
+                renderItem={({ item }) => <Character character={item} theme={theme} />}
+                ListEmptyComponent={() => {
+                    if (isLoading && !isFetchingNextPage) {
+                        return (
+                            <View style={{ gap: moderateScale(12) }}>
+                                {[...Array(5)].map((_, i) => (
+                                    <CharacterSkeleton key={`skeleton-${i}`} theme={theme} />
+                                ))}
+                            </View>
+                        );
+                    }
+                    if (!isLoading && !isFetchingNextPage) {
+                        return <EmptyCharactersStatePage />;
+                    }
+                    return null;
+                }}
+                onEndReached={() => {
+                    if (hasNextPage && !isFetchingNextPage) {
+                        fetchNextPage();
+                    }
+                }}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
+                onRefresh={refetch}
+                refreshing={isLoading}
+            />
 
             <CharacterFilterModal
                 ref={modalRef}
                 theme={theme}
                 onApply={setFilters}
             />
-        </ThemedView>
+        </View>
     );
 };
 

@@ -8,6 +8,7 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.ios.jsx', '.android.jsx', '.js', '.jsx', '.json', '.ts', '.tsx'],
         root: ['.'],
         alias: {
+          "$api": "./app/api",
           "$assets": "./app/assets",
           "$components": "./app/components",
           "$constants": "./app/constants",

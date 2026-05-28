@@ -3,19 +3,24 @@ import React from 'react'
 import { AppStackScreenProps } from '$types/navigation.types'
 import { EStackScreens } from '$constants/screen.constants'
 import { BaseImage, IconButton, ThemedView, ThemeText } from '$components/ui'
-import { useAppTheme } from '$hooks/common'
+import { useAppDispatch, useAppSelector, useAppTheme } from '$hooks/common'
 import { moderateScale } from '$constants/styles.constants'
 import { styling } from './styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import { ChevronLeft, Heart } from 'lucide-react-native'
 import { StatusBadge } from '$components/layout'
 import { ICharacter } from '$types/data.types'
+import { toggleFavourite } from '$store/actions/favourite.actions'
 
 const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DETAIL>> = ({ navigation, route }) => {
 
     const { colors, theme, insets } = useAppTheme();
     const styles = styling(theme, insets);
     const character: ICharacter = JSON.parse(route.params.character);
+
+    const dispatch = useAppDispatch();
+    const favourites = useAppSelector((state) => state.favourites) || [];
+    const isFavourite = favourites.some((fav: ICharacter) => fav.id === character.id);
 
     return (
         <ThemedView>
@@ -88,8 +93,14 @@ const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DET
                     </IconButton>
                     <IconButton
                         style={styles.headerAction}
+                        onPress={() => dispatch(toggleFavourite(character))}
                     >
-                        <Heart width={moderateScale(24)} height={moderateScale(24)} color={colors['text-primary']} />
+                        <Heart
+                            width={moderateScale(24)}
+                            height={moderateScale(24)}
+                            color={isFavourite ? colors['brand-primary'] : colors['text-primary']}
+                            fill={isFavourite ? colors['brand-primary'] : 'none'}
+                        />
                     </IconButton>
                 </View>
             </ScrollView>

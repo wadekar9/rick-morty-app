@@ -20,9 +20,12 @@
     "moduleResolution": "bundler",
     "target": "ESNext",
     "lib": [
-      "ES2017"
+      "ES2019"
     ],
     "paths": {
+      "$api/*": [
+        "app/api/*"
+      ],
       "$assets/*": [
         "app/assets/*"
       ],

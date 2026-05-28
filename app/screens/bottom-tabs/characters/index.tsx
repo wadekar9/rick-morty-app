@@ -1,41 +1,85 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
 import { BottomTabStackScreenProps } from '$types/navigation.types';
 import { EBottomScreens } from '$constants/screen.constants';
-import { ThemedView, ThemeText } from '$components/ui';
+import { ThemedView } from '$components/ui';
 import { TabHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
-import { useAnimatedValue, View } from 'react-native';
+import { useAnimatedValue, View, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Character } from '$components/layout';
 import { CharacterFilterModal } from '$components/modals';
 import { SheetModalRef } from '$types/common.types';
+import { useCharacters } from '$hooks/modules';
+import { moderateScale } from '$constants/styles.constants';
 
 const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>> = () => {
 
-    const { theme, insets } = useAppTheme();
+    const { theme, insets, colors } = useAppTheme();
     const styles = styling(theme, insets);
 
     const scrollY = useAnimatedValue(0);
 
     const modalRef = useRef<SheetModalRef>(null);
 
+    const [search, setSearch] = useState<string>('');
+    const [filters, setFilters] = useState<{ status: string; gender: string }>({ status: '', gender: '' });
+
+    const { data, isLoading, fetchNextPage, refetch, hasNextPage, isFetchingNextPage } = useCharacters({
+        name: search,
+        status: filters.status,
+        gender: filters.gender
+    });
+
+    const characters = useMemo(() => {
+        return data?.pages.flatMap(page => page.results) || [];
+    }, [data]);
+
+    const renderFooter = useCallback(() => {
+        if (!isFetchingNextPage && !isLoading) return null;
+        return (
+            <View style={{ padding: moderateScale(16), alignItems: 'center' }}>
+                <ActivityIndicator size="small" color={colors['brand-primary']} />
+            </View>
+        );
+    }, [isFetchingNextPage, isLoading]);
+
     return (
         <ThemedView>
-            <TabHeader onPressFilter={() => modalRef.current?.open()} hasSearchBar headerText='Characters' theme={theme} />
+            <TabHeader
+                onPressFilter={() => modalRef.current?.open()}
+                onChangeSearch={setSearch}
+                hasSearchBar
+                headerText='Characters'
+                theme={theme}
+            />
             <View style={styles.container}>
 
                 <FlatList
-                    data={Array.from({ length: 5 }).fill(1)}
-                    keyExtractor={(_, idx) => idx.toString()}
+                    data={characters}
+                    keyExtractor={(item, idx) => `${item.id}-${idx}`}
                     contentContainerStyle={styles.contentContainer}
                     scrollEventThrottle={16}
-                    renderItem={() => <Character theme={theme} />}
+                    initialNumToRender={20}
+                    maxToRenderPerBatch={10}
+                    renderItem={({ item }) => <Character character={item} theme={theme} />}
+                    onEndReached={() => {
+                        if (hasNextPage && !isFetchingNextPage) {
+                            fetchNextPage();
+                        }
+                    }}
+                    onEndReachedThreshold={0.5}
+                    ListFooterComponent={renderFooter}
+                    onRefresh={refetch}
                 />
 
             </View>
 
-            <CharacterFilterModal ref={modalRef} theme={theme} />
+            <CharacterFilterModal
+                ref={modalRef}
+                theme={theme}
+                onApply={setFilters}
+            />
         </ThemedView>
     );
 };

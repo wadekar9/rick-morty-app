@@ -10,16 +10,17 @@ interface TabHeaderProps {
     headerText?: string;
     hasSearchBar?: boolean;
     onPressFilter?: () => void;
+    onChangeSearch?: (text: string) => void;
 }
 
-const TabHeader: React.FC<TabHeaderProps> = ({ theme, headerText = 'HeaderText', hasSearchBar = false, onPressFilter }) => {
+const TabHeader: React.FC<TabHeaderProps> = ({ theme, headerText = 'HeaderText', hasSearchBar = false, onPressFilter, onChangeSearch }) => {
 
     const styles = styling(theme);
 
     return (
         <Animated.View style={styles.container}>
             <ThemeText>{headerText}</ThemeText>
-            {hasSearchBar && <BaseSearchBar onPressFilter={onPressFilter} placeholder='Search...' />}
+            {hasSearchBar && <BaseSearchBar onPressFilter={onPressFilter} onChange={onChangeSearch} placeholder='Search...' />}
         </Animated.View>
     )
 }

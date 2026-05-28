@@ -6,17 +6,21 @@ import store from '$store/redux.store';
 import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppStackNavigator from '$navigation/app-stack-navigator.navigation';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '$utils/query-client';
 
 const App = () => {
   return (
     <AppThemeProvider>
-      <StoreProvider store={store}>
-        <SafeAreaProvider style={{ flex: 1 }}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <AppStackNavigator />
-          </GestureHandlerRootView>
-        </SafeAreaProvider>
-      </StoreProvider>
+      <QueryClientProvider client={queryClient}>
+        <StoreProvider store={store}>
+          <SafeAreaProvider style={{ flex: 1 }}>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <AppStackNavigator />
+            </GestureHandlerRootView>
+          </SafeAreaProvider>
+        </StoreProvider>
+      </QueryClientProvider>
 
       <FlashMessage position="top" />
     </AppThemeProvider>

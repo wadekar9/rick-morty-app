@@ -6,7 +6,7 @@ import { EFonts, EFontSize, moderateScale } from "$constants/styles.constants";
 import { COLORS } from "$constants/colors.constants";
 
 interface StatusBadgeProps {
-    status: 'Alive' | 'Dead' | 'Unknown';
+    status: 'Alive' | 'Dead' | 'unknown';
     theme: ITheme;
 }
 
@@ -16,7 +16,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ theme, status }) => {
 
     return (
         <View style={[styles.container, { borderColor: statusColor }]}>
-            <ThemeText style={[styles.statusText, { color: statusColor }]}>{status}</ThemeText>
+            <ThemeText style={[styles.statusText, { color: statusColor }]}>{status || 'Unknown'}</ThemeText>
         </View>
     )
 }
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     },
     statusText: {
         fontSize: EFontSize.XS,
-        fontFamily: EFonts.MEDIUM
+        fontFamily: EFonts.MEDIUM,
+        textTransform: 'capitalize'
     }
 });

@@ -9,11 +9,13 @@ import { styling } from './styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import { ChevronLeft, Heart } from 'lucide-react-native'
 import { StatusBadge } from '$components/layout'
+import { ICharacter } from '$types/data.types'
 
-const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DETAIL>> = ({ navigation }) => {
+const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DETAIL>> = ({ navigation, route }) => {
 
     const { colors, theme, insets } = useAppTheme();
     const styles = styling(theme, insets);
+    const character: ICharacter = JSON.parse(route.params.character);
 
     return (
         <ThemedView>
@@ -26,42 +28,42 @@ const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DET
                 <View style={styles.image}>
                     <BaseImage
                         wrapperStyle={{ width: '100%', height: '100%' }}
-                        source={{ uri: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg' }}
+                        source={{ uri: character?.image }}
                         resizeMode={'cover'}
                     />
 
                     <View style={styles.statusWrapper}>
-                        <StatusBadge theme={theme} status='Alive' />
+                        <StatusBadge theme={theme} status={character?.status} />
                     </View>
                 </View>
 
                 <View style={styles.content}>
-                    <ThemeText numberOfLines={2} style={styles.title}>{'Rick Sanchez'}</ThemeText>
+                    <ThemeText numberOfLines={2} style={styles.title}>{character?.name}</ThemeText>
 
                     <View style={styles.flexRow}>
                         <ThemeText style={styles.keyLabel}>Species: </ThemeText>
-                        <ThemeText style={styles.keyValue}>Human</ThemeText>
+                        <ThemeText style={styles.keyValue}>{character?.species}</ThemeText>
                     </View>
                     <View style={styles.flexRow}>
                         <ThemeText style={styles.keyLabel}>Gender: </ThemeText>
-                        <ThemeText style={styles.keyValue}>Male</ThemeText>
+                        <ThemeText style={styles.keyValue}>{character?.gender}</ThemeText>
                     </View>
                     <View style={styles.flexRow}>
                         <ThemeText style={styles.keyLabel}>Origin: </ThemeText>
-                        <ThemeText style={styles.keyValue}>Earth (C-137)</ThemeText>
+                        <ThemeText style={styles.keyValue}>{character?.origin?.name}</ThemeText>
                     </View>
                     <View style={styles.flexRow}>
                         <ThemeText style={styles.keyLabel}>Location: </ThemeText>
-                        <ThemeText style={styles.keyValue}>Citadel of Ricks</ThemeText>
+                        <ThemeText numberOfLines={2} style={styles.keyValue}>{character?.location?.name}</ThemeText>
                     </View>
 
                     <View style={styles.section}>
                         <ThemeText variant='h3'>Episodes:</ThemeText>
 
                         <View style={styles.episodes}>
-                            {Array.from({ length: 20 }, (_, idx) => {
+                            {character?.episode?.map((item: string, idx: number) => {
 
-                                const episodeNumber = 'https://rickandmortyapi.com/api/episode/1'.split('/').pop();
+                                const episodeNumber = item.split('/').pop();
 
                                 return (
                                     <View

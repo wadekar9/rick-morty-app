@@ -7,32 +7,34 @@ import { BaseImage, ThemeText } from '$components/ui';
 import StatusBadge from './status-badge.component';
 import { appStackNavigationRef } from '$utils/navigation';
 import { EStackScreens } from '$constants/screen.constants';
+import { ICharacter } from '$types/data.types';
 
 interface CharacterProps {
     theme: ITheme;
+    character: ICharacter;
 }
 
-const Character: React.FC<CharacterProps> = ({ theme }) => {
+const Character: React.FC<CharacterProps> = ({ theme, character }) => {
 
     const styles = styling(theme);
 
     return (
         <Pressable
             style={styles.container}
-            onPress={() => appStackNavigationRef.current?.navigate(EStackScreens.CHARACTER_DETAIL, { id: 1 })}
+            onPress={() => appStackNavigationRef.current?.navigate(EStackScreens.CHARACTER_DETAIL, { character: JSON.stringify(character) })}
         >
             <View style={styles.image}>
                 <BaseImage
-                    source={{ uri: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg' }}
+                    source={{ uri: character?.image }}
                     resizeMode="cover"
-                    wrapperStyle={{ width: '90%', aspectRatio: 1, borderRadius: moderateScale(8), overflow: 'hidden' }}
+                    wrapperStyle={styles.imageWrapper}
                 />
             </View>
             <View style={styles.content}>
-                <ThemeText variant='h4' ellipsizeMode='tail'>Rick Sanchez</ThemeText>
-                <StatusBadge theme={theme} status='Alive' />
-                <ThemeText style={styles.specieText}>Species: {'Human'}</ThemeText>
-                <ThemeText style={styles.locationText}>Location: {'Citadel of Ricks'}</ThemeText>
+                <ThemeText variant='h4' ellipsizeMode='tail'>{character?.name}</ThemeText>
+                <StatusBadge theme={theme} status={character?.status || 'Unknown'} />
+                <ThemeText style={styles.specieText}>Species: {character?.species}</ThemeText>
+                <ThemeText style={styles.locationText}>Location: {character?.location?.name}</ThemeText>
             </View>
         </Pressable>
     )
@@ -73,4 +75,10 @@ const styling = (theme: ITheme) => StyleSheet.create({
         fontSize: EFontSize.SM,
         color: COLORS[theme]['text-secondary']
     },
+    imageWrapper: {
+        width: '90%',
+        aspectRatio: 1,
+        borderRadius: moderateScale(8),
+        overflow: 'hidden'
+    }
 });

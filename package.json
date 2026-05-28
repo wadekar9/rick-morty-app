@@ -14,7 +14,7 @@
     "android:sha256": "keytool -list -v -keystore android/app/development-release.keystore -alias key0 -storepass 123456 -keypass 123456"
   },
   "dependencies": {
-    "@d11/react-native-fast-image": "^8.12.0",
+    "@d11/react-native-fast-image": "^8.13.0",
     "@react-native-community/netinfo": "^11.5.2",
     "@react-navigation/bottom-tabs": "7.5.0",
     "@react-navigation/native": "^7.1.18",

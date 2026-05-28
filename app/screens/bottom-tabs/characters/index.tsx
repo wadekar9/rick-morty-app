@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { BottomTabStackScreenProps } from '$types/navigation.types';
 import { EBottomScreens } from '$constants/screen.constants';
 import { ThemedView, ThemeText } from '$components/ui';
@@ -8,6 +8,8 @@ import { styling } from './styles';
 import { useAnimatedValue, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Character } from '$components/layout';
+import { CharacterFilterModal } from '$components/modals';
+import { SheetModalRef } from '$types/common.types';
 
 const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>> = () => {
 
@@ -16,9 +18,11 @@ const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>>
 
     const scrollY = useAnimatedValue(0);
 
+    const modalRef = useRef<SheetModalRef>(null);
+
     return (
         <ThemedView>
-            <TabHeader hasSearchBar headerText='Characters' theme={theme} />
+            <TabHeader onPressFilter={() => modalRef.current?.open()} hasSearchBar headerText='Characters' theme={theme} />
             <View style={styles.container}>
 
                 <FlatList
@@ -30,6 +34,8 @@ const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>>
                 />
 
             </View>
+
+            <CharacterFilterModal ref={modalRef} theme={theme} />
         </ThemedView>
     );
 };

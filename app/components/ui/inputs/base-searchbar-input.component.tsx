@@ -16,6 +16,7 @@ interface BaseSearchbarRef {
 interface BaseSearchbarProps extends Omit<TextInputProps, 'style' | 'editable' | 'multiline' | 'onChange'> {
     value?: string;
     onChange?: (e: string) => void;
+    onPressFilter?: () => void;
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
 }
@@ -23,6 +24,7 @@ interface BaseSearchbarProps extends Omit<TextInputProps, 'style' | 'editable' |
 const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>(({
     value,
     onChange,
+    onPressFilter,
     disabled = false,
     containerStyle,
     autoComplete = 'off',
@@ -96,7 +98,7 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>(({
                     }}
                 />
             </View>
-            <IconButton style={styles.icon}>
+            <IconButton style={styles.icon} onPress={onPressFilter}>
                 <ListFilter size={moderateScale(24)} color={colors['icon-default']} />
             </IconButton>
         </View>

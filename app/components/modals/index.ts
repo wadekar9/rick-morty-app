@@ -1,0 +1,1 @@
+export { default as CharacterFilterModal } from './character-filters-modal.component';

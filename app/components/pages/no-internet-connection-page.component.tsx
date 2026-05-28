@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { ThemedView } from '$components/ui'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
@@ -8,8 +8,7 @@ import { COLORS } from '$constants/colors.constants'
 import { BaseButton, ThemeText } from '$components/ui'
 import { useNetInfoInstance } from "@react-native-community/netinfo";
 import { useNavigation } from '@react-navigation/native'
-import { RotateCcw } from 'lucide-react-native'
-import { IMAGES } from '$assets/images';
+import { RotateCcw, WifiOff } from 'lucide-react-native'
 
 /**
  * Page component displayed when the app loses internet connection.
@@ -38,13 +37,7 @@ const NoInternetConnectionPage: React.FC = () => {
   return (
     <ThemedView>
       <View style={styles.container}>
-        <Image
-          source={IMAGES.NO_INTERNET}
-          style={{ width: moderateScale(150), height: moderateScale(150) }}
-          accessible={true}
-          accessibilityRole="image"
-          accessibilityLabel="No Internet Illustration"
-        />
+        <WifiOff size={moderateScale(100)} color={colors['text-secondary']} />
 
         <View style={styles.content}>
           <ThemeText style={styles.label}>No internet connection!</ThemeText>

@@ -1,5 +1,64 @@
 {
   "extends": "@react-native/typescript-config",
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "**/Pods"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/Pods"
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "allowJs": false,
+    "jsx": "react-native",
+    "noImplicitAny": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "lib": [
+      "ES2017"
+    ],
+    "paths": {
+      "$assets/*": [
+        "app/assets/*"
+      ],
+      "$components/*": [
+        "app/components/*"
+      ],
+      "$constants/*": [
+        "app/constants/*"
+      ],
+      "$context/*": [
+        "app/context/*"
+      ],
+      "$dto/*": [
+        "app/dto/*"
+      ],
+      "$helpers/*": [
+        "app/helpers/*"
+      ],
+      "$hooks/*": [
+        "app/hooks/*"
+      ],
+      "$navigation/*": [
+        "app/navigation/*"
+      ],
+      "$screens/*": [
+        "app/screens/*"
+      ],
+      "$store/*": [
+        "app/store/*"
+      ],
+      "$types/*": [
+        "app/types/*"
+      ],
+      "$utils/*": [
+        "app/utils/*"
+      ]
+    }
+  }
 }

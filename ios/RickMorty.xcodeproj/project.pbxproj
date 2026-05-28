@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-RickMorty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-RickMorty.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		1DCF461BAC7147B7B15D42F7 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D93C78780B8F4474B3D0F9E5 /* Poppins-SemiBold.ttf */; };
+		2B5BA6C8D93D4E1398592C29 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB8E4E7EB8F4DD197E58940 /* Poppins-Bold.ttf */; };
+		2C7BD5B1D13A4C9096E431C7 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C91BBFBA84E74A3C8D411340 /* BootSplash.storyboard */; };
+		305C8E7028C74EB7BBB18A8D /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6CA74387BB06432F9D827F9B /* Poppins-Black.ttf */; };
 		3BD2FB204607CA5FBE290D81 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9392BE6C0C764C89940D90DD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3060804F74A0487C9851A3A2 /* Colors.xcassets */; };
+		95422E342E36432AB7ED4FE4 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC6A67D5A7684BCC916EA444 /* Poppins-Regular.ttf */; };
+		9F81B5920AA844658BC84220 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FFC869AB1CD44B08E795F2A /* Poppins-Light.ttf */; };
+		CCFE5D565EEE48BDB01E0DC1 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22EB0A7B09714DCBAA80AF96 /* Poppins-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,11 +26,18 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RickMorty/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RickMorty/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = RickMorty/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		22EB0A7B09714DCBAA80AF96 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../app/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		3060804F74A0487C9851A3A2 /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = RickMorty/Colors.xcassets; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-RickMorty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickMorty.debug.xcconfig"; path = "Target Support Files/Pods-RickMorty/Pods-RickMorty.debug.xcconfig"; sourceTree = "<group>"; };
+		3FFC869AB1CD44B08E795F2A /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../app/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-RickMorty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickMorty.release.xcconfig"; path = "Target Support Files/Pods-RickMorty/Pods-RickMorty.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-RickMorty.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RickMorty.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CA74387BB06432F9D827F9B /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../app/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = RickMorty/AppDelegate.swift; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RickMorty/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BCB8E4E7EB8F4DD197E58940 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../app/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		C91BBFBA84E74A3C8D411340 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = RickMorty/BootSplash.storyboard; sourceTree = "<group>"; };
+		D93C78780B8F4474B3D0F9E5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../app/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		EC6A67D5A7684BCC916EA444 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../app/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -45,8 +59,9 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				C91BBFBA84E74A3C8D411340 /* BootSplash.storyboard */,
+				3060804F74A0487C9851A3A2 /* Colors.xcassets */,
 			);
 			name = RickMorty;
 			sourceTree = "<group>";
@@ -75,6 +90,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				C3A1939B52F54648822D48B9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -96,6 +112,19 @@
 				5709B34CF0A7D63546082F79 /* Pods-RickMorty.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C3A1939B52F54648822D48B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6CA74387BB06432F9D827F9B /* Poppins-Black.ttf */,
+				BCB8E4E7EB8F4DD197E58940 /* Poppins-Bold.ttf */,
+				3FFC869AB1CD44B08E795F2A /* Poppins-Light.ttf */,
+				22EB0A7B09714DCBAA80AF96 /* Poppins-Medium.ttf */,
+				EC6A67D5A7684BCC916EA444 /* Poppins-Regular.ttf */,
+				D93C78780B8F4474B3D0F9E5 /* Poppins-SemiBold.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,9 +187,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3BD2FB204607CA5FBE290D81 /* PrivacyInfo.xcprivacy in Resources */,
+				305C8E7028C74EB7BBB18A8D /* Poppins-Black.ttf in Resources */,
+				2B5BA6C8D93D4E1398592C29 /* Poppins-Bold.ttf in Resources */,
+				9F81B5920AA844658BC84220 /* Poppins-Light.ttf in Resources */,
+				CCFE5D565EEE48BDB01E0DC1 /* Poppins-Medium.ttf in Resources */,
+				95422E342E36432AB7ED4FE4 /* Poppins-Regular.ttf in Resources */,
+				1DCF461BAC7147B7B15D42F7 /* Poppins-SemiBold.ttf in Resources */,
+				2C7BD5B1D13A4C9096E431C7 /* BootSplash.storyboard in Resources */,
+				9392BE6C0C764C89940D90DD /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,9 +227,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RickMorty/Pods-RickMorty-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RickMorty/Pods-RickMorty-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -230,9 +270,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RickMorty/Pods-RickMorty-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RickMorty/Pods-RickMorty-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -262,7 +306,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = RickMorty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				INFOPLIST_KEY_CFBundleDisplayName = RickMorty;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -289,7 +334,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = RickMorty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				INFOPLIST_KEY_CFBundleDisplayName = RickMorty;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

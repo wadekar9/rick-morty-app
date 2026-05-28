@@ -20,12 +20,14 @@ const ThemedView: React.FC<ThemedViewProps> = ({ children, theme, style, ...prop
         <View
             style={[
                 styles.container,
-                { backgroundColor: colors.background, paddingTop },
+                { backgroundColor: colors['brand-primary'], paddingTop },
                 style
             ]}
             {...props}
         >
-            {children}
+            <View style={[styles.container, { backgroundColor: colors.background }]}>
+                {children}
+            </View>
         </View>
     )
 }

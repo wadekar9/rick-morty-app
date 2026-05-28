@@ -7,7 +7,7 @@ import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
 import { useAnimatedValue, View, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { Character } from '$components/layout';
+import { Character, CharacterSkeleton } from '$components/layout';
 import { CharacterFilterModal } from '$components/modals';
 import { EmptyCharactersStatePage } from '$components/pages';
 import { SheetModalRef } from '$types/common.types';
@@ -65,6 +65,15 @@ const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>>
                     maxToRenderPerBatch={10}
                     renderItem={({ item }) => <Character character={item} theme={theme} />}
                     ListEmptyComponent={() => {
+                        if (isLoading && !isFetchingNextPage) {
+                            return (
+                                <View style={{ gap: moderateScale(12) }}>
+                                    {[...Array(5)].map((_, i) => (
+                                        <CharacterSkeleton key={`skeleton-${i}`} theme={theme} />
+                                    ))}
+                                </View>
+                            );
+                        }
                         if (!isLoading && !isFetchingNextPage) {
                             return <EmptyCharactersStatePage />;
                         }

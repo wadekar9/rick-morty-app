@@ -5,7 +5,7 @@ import { ThemedView } from '$components/ui';
 import { TabHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
-import { Location } from '$components/layout';
+import { Location, LocationSkeleton } from '$components/layout';
 import { ActivityIndicator, View, FlatList } from 'react-native';
 import { useLocations } from '$hooks/modules';
 import { ILocation } from '$types/data.types';
@@ -51,6 +51,18 @@ const Locations: React.FC<BottomTabStackScreenProps<EBottomScreens.LOCATIONS>> =
                 keyExtractor={(item) => String(item.id)}
                 contentContainerStyle={styles.contentContainer}
                 renderItem={renderItem}
+                ListEmptyComponent={() => {
+                    if (isLoading && !isFetchingNextPage) {
+                        return (
+                            <View style={{ gap: moderateScale(12) }}>
+                                {[...Array(8)].map((_, i) => (
+                                    <LocationSkeleton key={`skeleton-${i}`} theme={theme} />
+                                ))}
+                            </View>
+                        );
+                    }
+                    return null;
+                }}
                 showsVerticalScrollIndicator={false}
                 scrollEventThrottle={16}
                 onEndReached={() => {

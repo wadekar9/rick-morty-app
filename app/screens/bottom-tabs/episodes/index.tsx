@@ -5,7 +5,7 @@ import { ThemedView, ThemeText } from '$components/ui';
 import { TabHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
-import { Episode } from '$components/layout';
+import { Episode, EpisodeSkeleton } from '$components/layout';
 import { SectionList, ActivityIndicator, View } from 'react-native';
 import { useEpisodes } from '$hooks/modules';
 import { IEpisode } from '$types/data.types';
@@ -70,6 +70,18 @@ const Episodes: React.FC<BottomTabStackScreenProps<EBottomScreens.EPISODES>> = (
                 contentContainerStyle={styles.contentContainer}
                 renderItem={renderItem}
                 renderSectionHeader={renderSectionHeader}
+                ListEmptyComponent={() => {
+                    if (isLoading && !isFetchingNextPage) {
+                        return (
+                            <View style={{ gap: moderateScale(12) }}>
+                                {[...Array(8)].map((_, i) => (
+                                    <EpisodeSkeleton key={`skeleton-${i}`} theme={theme} />
+                                ))}
+                            </View>
+                        );
+                    }
+                    return null;
+                }}
                 stickySectionHeadersEnabled={true}
                 showsVerticalScrollIndicator={false}
                 scrollEventThrottle={16}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabNavigator from './bottom-tab-navigator.navigation';
@@ -7,8 +7,15 @@ import { appStackNavigationRef } from '$utils/navigation';
 import { EStackScreens } from '$constants/screen.constants';
 import { StackRoutes } from './routes';
 import BootSplash from 'react-native-bootsplash';
+import { ActivityIndicator, View } from 'react-native';
 
 const AppStack = createNativeStackNavigator<AppStackParamsList>();
+
+const ScreenFallback = () => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
+        <ActivityIndicator size="large" />
+    </View>
+);
 
 const AppStackNavigator = () => {
 
@@ -22,7 +29,13 @@ const AppStackNavigator = () => {
         >
             <AppStack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
                 <AppStack.Screen name={EStackScreens.BOTTOM_TAB_NAVIGATOR} component={BottomTabNavigator} />
-                <AppStack.Screen name={EStackScreens.CHARACTER_DETAIL} component={StackRoutes.CharacterDetails} />
+                <AppStack.Screen name={EStackScreens.CHARACTER_DETAIL}>
+                    {(props) => (
+                        <Suspense fallback={<ScreenFallback />}>
+                            <StackRoutes.CharacterDetails {...props as any} />
+                        </Suspense>
+                    )}
+                </AppStack.Screen>
             </AppStack.Navigator>
         </NavigationContainer>
     );

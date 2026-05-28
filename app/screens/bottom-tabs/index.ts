@@ -1,4 +1,6 @@
-export { default as Characters } from './characters';
-export { default as Locations } from './locations';
-export { default as Episodes } from './episodes';
-export { default as Favourites } from './favourites';
+import React from 'react';
+
+export const Characters = React.lazy(() => import('./characters'));
+export const Locations = React.lazy(() => import('./locations'));
+export const Episodes = React.lazy(() => import('./episodes'));
+export const Favourites = React.lazy(() => import('./favourites'));

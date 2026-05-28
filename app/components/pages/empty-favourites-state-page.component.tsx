@@ -7,6 +7,12 @@ import { ThemeText } from '$components/ui'
 import { ITheme } from '$types/theme.types'
 import { HeartOff } from 'lucide-react-native'
 
+/**
+ * Page component displayed when the user has no favourite characters saved.
+ * Renders an empty state illustration and prompt.
+ * 
+ * @returns The empty state view component.
+ */
 const EmptyFavouritesStatePage = () => {
 
   const { theme, colors } = useAppTheme();

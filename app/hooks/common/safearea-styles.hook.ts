@@ -24,6 +24,13 @@ type SafeAreaInsetsStyle<
     [K in Edges[number]as `${Property}${Capitalize<K>}`]: number
   }
 
+/**
+ * Custom hook to calculate global styles that account for safe area insets.
+ * Prevents content from overlapping system UI like notches and home indicators.
+ * @param safeAreaEdges An array of edges (top, bottom, left, right) to apply.
+ * @param property The CSS property to use ('padding' or 'margin').
+ * @returns A StyleSheet object containing safe area inset padding/margin.
+ */
 export function useSafeAreaInsetsStyle<
   Property extends "padding" | "margin" = "padding",
   Edges extends Array<ExtendedEdge> = [],

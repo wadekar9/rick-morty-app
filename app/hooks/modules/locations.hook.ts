@@ -1,6 +1,11 @@
 import { locationApi } from "$api/location.api";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+/**
+ * Hook that fetches and manages paginated location data from the API.
+ * Integrates with TanStack React Query for infinite scrolling support.
+ * @returns Location data, loading states, and pagination controls.
+ */
 export const useLocations = () => {
     const { data, isLoading, isError, error, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
         queryKey: ['locations'],

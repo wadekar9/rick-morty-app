@@ -2,6 +2,12 @@ import { characterApi } from "$api/character.api";
 import { ICharacterApiRequestDto } from "$dto/character.dto";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+/**
+ * Hook to fetch paginated character data from the Rick & Morty API.
+ * Supports filtering by character name, status, and gender.
+ * @param filters Object containing search and filter criteria.
+ * @returns Paginated character results and React Query states.
+ */
 export const useCharacters = (filters: Omit<ICharacterApiRequestDto, 'page'>) => {
 
     const { data, isLoading, isError, error, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({

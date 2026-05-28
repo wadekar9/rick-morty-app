@@ -12,6 +12,12 @@ interface LocationProps {
     location: ILocation;
 }
 
+/**
+ * Layout component to display a single location's details.
+ * Shows location name, type, dimension, and resident count.
+ * 
+ * @param props Properties containing the location data and current theme.
+ */
 const Location: React.FC<LocationProps> = ({ location, theme }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);

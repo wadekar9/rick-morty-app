@@ -10,6 +10,11 @@ interface StatusBadgeProps {
     theme: ITheme;
 }
 
+/**
+ * Renders a colored badge indicating a character's living status (Alive, Dead, Unknown).
+ * 
+ * @param props Properties containing the status string and theme.
+ */
 const StatusBadge: React.FC<StatusBadgeProps> = ({ theme, status }) => {
 
     const statusColor = status === 'Alive' ? COLORS[theme]["state-success"] : status === 'Dead' ? COLORS[theme]["state-danger"] : COLORS[theme]["state-warning"];

@@ -11,6 +11,12 @@ import { useNavigation } from '@react-navigation/native'
 import { RotateCcw } from 'lucide-react-native'
 import { IMAGES } from '$assets/images';
 
+/**
+ * Page component displayed when the app loses internet connection.
+ * Prompts the user to check their network settings.
+ * 
+ * @returns The no internet view component.
+ */
 const NoInternetConnectionPage: React.FC = () => {
 
   const { netInfo: { type, isConnected }, refresh } = useNetInfoInstance();

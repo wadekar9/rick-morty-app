@@ -9,6 +9,11 @@ interface TabNavigatorProps extends BottomTabBarProps {
     theme: ITheme;
 }
 
+/**
+ * Custom bottom tab bar component mimicking modern floating navigation designs.
+ * 
+ * @param props Tab navigation properties provided by React Navigation.
+ */
 const TabNavigator: React.FC<TabNavigatorProps> = ({
     state,
     descriptors,

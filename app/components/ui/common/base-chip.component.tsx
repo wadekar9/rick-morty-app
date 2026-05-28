@@ -12,6 +12,11 @@ interface BaseChipProps {
     onPress: () => void;
 }
 
+/**
+ * A small visual chip component used to display tags, statuses, or categories.
+ * 
+ * @param props Base chip properties including the text label.
+ */
 const BaseChip: React.FC<BaseChipProps> = ({
     theme,
     label,

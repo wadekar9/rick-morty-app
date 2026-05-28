@@ -14,6 +14,12 @@ interface CharacterProps {
     character: ICharacter;
 }
 
+/**
+ * Layout component to display a summary of a character.
+ * Renders character avatar, name, species, and current status.
+ * 
+ * @param props Properties containing character details and active theme.
+ */
 const Character: React.FC<CharacterProps> = ({ theme, character }) => {
 
     const styles = styling(theme);

@@ -15,6 +15,13 @@ interface CharacterFilterModalProps {
 
 interface CharacterFilterModalRef extends SheetModalRef { };
 
+/**
+ * Bottom sheet modal component that allows the user to filter characters
+ * by their status (Alive, Dead, Unknown) and gender (Male, Female, etc.).
+ * 
+ * @param props Component properties containing the apply filter callback.
+ * @param ref Forwarded reference to control the modal's open/close state.
+ */
 const CharacterFilterModal = forwardRef<CharacterFilterModalRef, CharacterFilterModalProps>(({
     theme,
     onApply

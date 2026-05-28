@@ -13,6 +13,12 @@ interface TabHeaderProps {
     onChangeSearch?: (text: string) => void;
 }
 
+/**
+ * Reusable screen header component for the tab screens.
+ * Includes an optional search bar and filter button.
+ * 
+ * @param props Properties defining the title, search callbacks, and layout.
+ */
 const TabHeader: React.FC<TabHeaderProps> = ({ theme, headerText = 'HeaderText', hasSearchBar = false, onPressFilter, onChangeSearch }) => {
 
     const styles = styling(theme);

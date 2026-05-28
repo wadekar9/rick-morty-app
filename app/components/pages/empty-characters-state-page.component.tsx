@@ -7,6 +7,12 @@ import { ThemeText } from '$components/ui'
 import { ITheme } from '$types/theme.types'
 import { SearchX } from 'lucide-react-native'
 
+/**
+ * Page component displayed when a character search yields no results.
+ * Informs the user to adjust their search criteria or filters.
+ * 
+ * @returns The empty search state view component.
+ */
 const EmptyCharactersStatePage = () => {
 
     const { theme, colors } = useAppTheme();

@@ -21,6 +21,13 @@ interface BaseSearchbarProps extends Omit<TextInputProps, 'style' | 'editable' |
     containerStyle?: StyleProp<ViewStyle>;
 }
 
+/**
+ * Search input component with built-in search icon and clear button.
+ * Includes an integrated debounce mechanism to limit callback frequency.
+ * 
+ * @param props Properties for managing input text, callbacks, and styles.
+ * @param ref Forwarded reference to control the input explicitly.
+ */
 const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>(({
     value,
     onChange,

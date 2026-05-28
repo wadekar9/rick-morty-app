@@ -16,6 +16,12 @@ interface BaseButtonProps extends PressableProps {
   disabled?: boolean;
 };
 
+/**
+ * Primary button component used throughout the application.
+ * Supports multiple variants (primary, secondary, outline) and loading states.
+ * 
+ * @param props Base button properties including variant and title.
+ */
 const BaseButton: React.FC<BaseButtonProps> = ({
   theme = 'light',
   label,

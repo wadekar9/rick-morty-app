@@ -1,6 +1,11 @@
 import { episodeApi } from "$api/episode.api";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+/**
+ * Hook to fetch paginated episode data from the API.
+ * Returns infinite query properties to support flat list scrolling.
+ * @returns Episode data and React Query pagination helpers.
+ */
 export const useEpisodes = () => {
     const { data, isLoading, isError, error, fetchNextPage, refetch, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
         queryKey: ['episodes'],

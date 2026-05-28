@@ -13,6 +13,12 @@ interface EpisodeProps {
     episode: IEpisode;
 }
 
+/**
+ * Layout component to display information for a single episode.
+ * Shows the episode title, air date, and episode code.
+ * 
+ * @param props Properties containing the episode data and theme.
+ */
 const Episode: React.FC<EpisodeProps> = ({ episode, theme }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);

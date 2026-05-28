@@ -3,6 +3,11 @@ import { AppThemeContext } from '$context/app-theme.context';
 import { useContext, useMemo } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+/**
+ * Hook to access the current application theme context.
+ * Provides theme mode (light/dark), color tokens, and safe area insets.
+ * @returns Theme context including colors and insets.
+ */
 export const useAppTheme = () => {
     const context = useContext(AppThemeContext);
     const insets = useSafeAreaInsets();

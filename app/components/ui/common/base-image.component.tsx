@@ -12,6 +12,12 @@ interface AutoImageProps extends Omit<FastImageProps, 'style'> {
     wrapperProps?: ViewProps;
 }
 
+/**
+ * Enhanced image component that supports fast loading, caching, and fallback states.
+ * Wraps FastImage for optimal performance in React Native.
+ * 
+ * @param props Image properties including source, resizeMode, and styles.
+ */
 const BaseImage = (props: AutoImageProps) => {
 
     const { width: BASE_WIDTH, height: BASE_HEIGHT, imageStyle, wrapperStyle, wrapperProps, ...imageProps } = props;

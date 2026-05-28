@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabsRoutes } from './routes';
-import { TabBarNavigator } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { BottomTabParamsList, AppStackScreenProps } from '$types/navigation.types';
 import { EBottomScreens, EStackScreens } from '$constants/screen.constants';
@@ -26,7 +25,6 @@ const BottomTabNavigator: React.FC<AppStackScreenProps<EStackScreens.BOTTOM_TAB_
                     shadowOpacity: 0,
                 },
             }}
-            tabBar={(props) => <TabBarNavigator theme={theme} {...props} />}
         >
             <BottomTab.Screen
                 name={EBottomScreens.CHARACTERS}

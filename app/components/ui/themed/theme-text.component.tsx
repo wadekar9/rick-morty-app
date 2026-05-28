@@ -1,4 +1,4 @@
-import { typography, TypographyVariant } from '$styles/typography';
+import { typography, TypographyVariant } from '$utils/typography';
 import React from 'react';
 import { Text, TextStyle, StyleProp, TextProps } from 'react-native';
 import { useAppTheme } from '$hooks/common';

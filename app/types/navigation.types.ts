@@ -4,6 +4,7 @@ import { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation
 
 export type AppStackParamsList = {
     [EStackScreens.CHARACTER_DETAIL]: undefined;
+    [EStackScreens.BOTTOM_TAB_NAVIGATOR]: undefined;
 }
 
 export type BottomTabParamsList = {

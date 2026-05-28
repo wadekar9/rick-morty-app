@@ -4,7 +4,7 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { COLORS } from '$constants/colors.constants'
 import { useAppTheme, useDebounce } from '$hooks/common';
 import { Search, X } from 'lucide-react-native';
-import { ITheme } from '$types/common.types';
+import { ITheme } from '$types/theme.types';;
 import { IconButton } from '../buttons';
 
 interface BaseSearchbarRef {

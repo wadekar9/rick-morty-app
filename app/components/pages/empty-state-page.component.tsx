@@ -3,11 +3,11 @@ import React from 'react'
 import { ThemedView } from '$components/ui'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { useAppTheme } from '$hooks/common'
-import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
-import { IMAGES } from '$assets/images'
 import { ThemeText } from '$components/ui'
 import { ImageSourcePropType } from 'react-native'
+import { ITheme } from '$types/theme.types'
+import { IMAGES } from '$assets/images'
 
 export interface EmptyStatePageProps {
   title?: string;

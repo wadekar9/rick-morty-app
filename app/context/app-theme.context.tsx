@@ -1,10 +1,7 @@
 import React, { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-import { Storage } from '$utils/storage';
-import { EStorageKeys } from '$constants/storage.constants';
 import { Appearance } from 'react-native';
 import { AppThemeContextProps } from '$types/common.types';
-import { IBaseTheme, ITheme } from '$dto/common';
-
+import { IBaseTheme, ITheme } from '$types/theme.types';
 
 export const AppThemeContext = createContext<AppThemeContextProps | undefined>(undefined);
 
@@ -17,15 +14,7 @@ const AppThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children })
     const applyTheme = useCallback((newTheme: IBaseTheme) => {
         setSelectedTheme(newTheme);
         setTheme(newTheme === 'default' ? systemTheme : newTheme);
-        Storage.set(EStorageKeys.APP_THEME, newTheme);
     }, [systemTheme]);
-
-    useEffect(() => {
-        (async () => {
-            const savedTheme = Storage.getString(EStorageKeys.APP_THEME);
-            applyTheme(savedTheme as IBaseTheme || 'default');
-        })();
-    }, [applyTheme]);
 
     useEffect(() => {
         const listener = Appearance.addChangeListener(({ colorScheme }) => {

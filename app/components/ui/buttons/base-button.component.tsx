@@ -1,7 +1,9 @@
 import React from 'react'
-import { ITheme } from '$types/common.types';
-import BasePressableButton from './base-pressable-button.component';
-import { PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { Pressable, PressableProps, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { EFonts, moderateScale } from '$constants/styles.constants';
+import { COLORS } from '$constants/colors.constants';
+import { ThemeText } from '../themed';
+import { ITheme } from '$types/theme.types';
 
 interface BaseButtonProps extends PressableProps {
   theme?: ITheme;
@@ -11,6 +13,7 @@ interface BaseButtonProps extends PressableProps {
   RightAccessory?: React.ReactNode;
   LeftAccessory?: React.ReactNode;
   outline?: boolean;
+  disabled?: boolean;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
@@ -21,20 +24,58 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   RightAccessory,
   LeftAccessory,
   outline,
+  disabled = false,
   ...props
 }) => {
+
+  const styles = styling(theme);
+
   return (
-    <BasePressableButton
+    <Pressable
       {...props}
-      theme={theme}
-      label={label}
-      labelStyle={labelStyle}
-      containerStyle={containerStyle}
-      RightAccessory={RightAccessory}
-      LeftAccessory={LeftAccessory}
-      outline={outline}
-    />
+      disabled={disabled}
+      style={[
+        styles.wrapper,
+        outline && styles.outlineWrapper,
+        disabled && { opacity: 0.5 },
+        containerStyle
+      ]}
+      accessibilityRole={props.accessibilityRole || "button"}
+      accessibilityState={{ ...props.accessibilityState, disabled: !!disabled }}
+    >
+      {!!LeftAccessory && LeftAccessory}
+      <ThemeText style={[styles.label, outline && styles.outlineLabel, labelStyle]}>{label}</ThemeText>
+      {!!RightAccessory && RightAccessory}
+    </Pressable>
   )
 }
 
 export default React.memo(BaseButton);
+
+const styling = (theme: ITheme) => StyleSheet.create({
+  wrapper: {
+    width: '100%',
+    height: moderateScale(50),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: moderateScale(5),
+    gap: moderateScale(10),
+    backgroundColor: COLORS[theme]['brand-primary']
+  },
+  outlineWrapper: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: COLORS[theme]['brand-primary']
+  },
+  label: {
+    fontFamily: EFonts.MEDIUM,
+    fontSize: moderateScale(15),
+    color: COLORS[theme].surface,
+    textTransform: 'capitalize'
+  },
+  outlineLabel: {
+    color: COLORS[theme]['brand-primary']
+  }
+})  

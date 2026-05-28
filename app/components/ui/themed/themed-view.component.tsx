@@ -1,7 +1,7 @@
 import { StyleSheet, View, ViewProps } from 'react-native'
 import React from 'react'
 import { useAppTheme, useSafeAreaInsetsStyle } from '$hooks/common';
-import { ITheme } from '$types/common.types';
+import { ITheme } from '$types/theme.types';;
 import { COLORS } from '$constants/colors.constants';
 
 interface ThemedViewProps extends ViewProps {

@@ -2,14 +2,14 @@ import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { ThemedView } from '$components/ui'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
-import { ITheme } from '$types/common.types'
+import { ITheme } from '$types/theme.types';
 import { useAppTheme } from '$hooks/common'
 import { COLORS } from '$constants/colors.constants'
 import { BaseButton, ThemeText } from '$components/ui'
 import { useNetInfoInstance } from "@react-native-community/netinfo";
 import { useNavigation } from '@react-navigation/native'
-import { IMAGES } from '$assets/images'
 import { RotateCcw } from 'lucide-react-native'
+import { IMAGES } from '$assets/images';
 
 const NoInternetConnectionPage: React.FC = () => {
 
@@ -33,7 +33,7 @@ const NoInternetConnectionPage: React.FC = () => {
     <ThemedView>
       <View style={styles.container}>
         <Image
-          source={IMAGES.NETWORK_CONNECTION}
+          source={IMAGES.NO_INTERNET}
           style={{ width: moderateScale(150), height: moderateScale(150) }}
           accessible={true}
           accessibilityRole="image"

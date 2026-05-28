@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import { BottomTabStackScreenProps } from '$types/navigation.types';
 import { EBottomScreens } from '$constants/screen.constants';
 import { ThemedView, ThemeText } from '$components/ui';
@@ -6,35 +6,23 @@ import { TabHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
 import { Episode } from '$components/layout';
-import { SectionList } from 'react-native';
-
-const MOCK_EPISODES = Array.from({ length: 51 }).map((_, i) => {
-    const season = Math.floor(i / 11) + 1;
-    const episode = (i % 11) + 1;
-    // Generate some random character IDs for each episode
-    const characterCount = Math.floor(Math.random() * 15) + 5;
-    const characters = Array.from({ length: characterCount }).map(() => {
-        const charId = Math.floor(Math.random() * 800) + 1;
-        return `https://rickandmortyapi.com/api/character/${charId}`;
-    });
-
-    return {
-        id: String(i + 1),
-        name: `Episode ${i + 1}`,
-        air_date: 'December 2, 2013',
-        episode: `S${season.toString().padStart(2, '0')}E${episode.toString().padStart(2, '0')}`,
-        characters,
-        url: `https://rickandmortyapi.com/api/episode/${i + 1}`
-    }
-});
+import { SectionList, ActivityIndicator, View } from 'react-native';
+import { useEpisodes } from '$hooks/modules';
+import { IEpisode } from '$types/data.types';
+import { moderateScale } from '$constants/styles.constants';
 
 const Episodes: React.FC<BottomTabStackScreenProps<EBottomScreens.EPISODES>> = () => {
 
-    const { theme, insets } = useAppTheme();
+    const { theme, insets, colors } = useAppTheme();
     const styles = styling(theme, insets);
 
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useEpisodes();
+
     const sections = useMemo(() => {
-        const grouped = MOCK_EPISODES.reduce((acc, ep) => {
+        const episodes = data?.pages.flatMap(page => page.results) || [];
+
+        const grouped = episodes.reduce((acc, ep) => {
             const seasonStr = ep.episode.substring(1, 3);
             const seasonName = `Season ${parseInt(seasonStr, 10)}`;
             if (!acc[seasonName]) {
@@ -42,34 +30,60 @@ const Episodes: React.FC<BottomTabStackScreenProps<EBottomScreens.EPISODES>> = (
             }
             acc[seasonName].push(ep);
             return acc;
-        }, {} as Record<string, typeof MOCK_EPISODES>);
+        }, {} as Record<string, IEpisode[]>);
 
         return Object.entries(grouped).map(([title, data]) => ({
             title,
             data
         }));
-    }, []);
+    }, [data]);
 
-    const renderItem = useCallback(({ item }: any) => {
+    const renderItem = useCallback(({ item }: { item: IEpisode }) => {
         return <Episode episode={item} theme={theme} />;
     }, [theme]);
 
-    const renderSectionHeader = useCallback(({ section: { title } }: any) => {
+    const renderSectionHeader = useCallback(({ section: { title } }: { section: { title: string } }) => {
         return <ThemeText style={styles.sectionHeader}>{title}</ThemeText>;
     }, [styles.sectionHeader]);
+
+    const handleRefresh = useCallback(async () => {
+        setIsRefreshing(true);
+        await refetch();
+        setIsRefreshing(false);
+    }, [refetch]);
+
+    const renderFooter = useCallback(() => {
+        if (!isFetchingNextPage && !isLoading) return null;
+        return (
+            <View style={{ padding: moderateScale(16), alignItems: 'center' }}>
+                <ActivityIndicator size="small" color={colors['brand-primary']} />
+            </View>
+        );
+    }, [isFetchingNextPage, isLoading, colors]);
 
     return (
         <ThemedView>
             <TabHeader headerText='Episodes' theme={theme} />
             <SectionList
                 sections={sections}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => String(item.id)}
                 contentContainerStyle={styles.contentContainer}
                 renderItem={renderItem}
                 renderSectionHeader={renderSectionHeader}
                 stickySectionHeadersEnabled={true}
                 showsVerticalScrollIndicator={false}
                 scrollEventThrottle={16}
+                onEndReached={() => {
+                    if (hasNextPage && !isFetchingNextPage) {
+                        fetchNextPage();
+                    }
+                }}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
+                initialNumToRender={15}
+                maxToRenderPerBatch={10}
             />
         </ThemedView>
     );

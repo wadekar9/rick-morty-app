@@ -9,6 +9,7 @@ import { useAnimatedValue, View, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Character } from '$components/layout';
 import { CharacterFilterModal } from '$components/modals';
+import { EmptyCharactersStatePage } from '$components/pages';
 import { SheetModalRef } from '$types/common.types';
 import { useCharacters } from '$hooks/modules';
 import { moderateScale } from '$constants/styles.constants';
@@ -63,6 +64,12 @@ const Characters: React.FC<BottomTabStackScreenProps<EBottomScreens.CHARACTERS>>
                     initialNumToRender={20}
                     maxToRenderPerBatch={10}
                     renderItem={({ item }) => <Character character={item} theme={theme} />}
+                    ListEmptyComponent={() => {
+                        if (!isLoading && !isFetchingNextPage) {
+                            return <EmptyCharactersStatePage />;
+                        }
+                        return null;
+                    }}
                     onEndReached={() => {
                         if (hasNextPage && !isFetchingNextPage) {
                             fetchNextPage();

@@ -1,51 +1,207 @@
 # Rick and Morty Companion App
 
-A high-performance React Native application for exploring characters, locations, and episodes from the Rick and Morty universe. Features include offline persistence for favorites, scroll-driven animated headers, progressive image loading, and robust offline state handling.
+A React Native application for exploring characters, locations, and episodes from the Rick and Morty universe.
 
-> **Note**: This project was created and templated using my custom [rn-awesome-boilerplate](https://github.com/wadekar9/rn-awesome-boilerplate).
+> This project was bootstrapped using my custom React Native starter:
+> https://github.com/wadekar9/rn-awesome-boilerplate
 
-## Project Setup
+---
 
-Follow these steps to get the project running locally.
+# Demo & Deliverables
 
-### Prerequisites
-- Node.js (>= 18.x)
-- Yarn package manager
-- Ruby (>= 3.2.0) - required for CocoaPods compatibility
-- Xcode / Android Studio
+## GitHub Repository
 
-### Installation
+https://github.com/wadekar9/rick-morty-app
 
-1. **Install JavaScript dependencies:**
-   ```sh
-   yarn install
-   ```
+## Android APK
 
-2. **Install iOS Native Dependencies:**
-   Make sure you are using the correct Ruby version, then run:
-   ```sh
-   cd ios
-   bundle install
-   bundle exec pod install
-   cd ..
-   ```
+https://limewire.com/d/3iXsV#5aOuGJeqkA
 
-3. **Run the Application:**
-   ```sh
-   # For iOS
-   yarn ios
+---
 
-   # For Android
-   yarn android
-   ```
+# Features
 
-## Libraries & Technologies Used
+## Character Listing
 
-- **Core**: `react` (v19.1.0), `react-native` (v0.81.5)
-- **Navigation**: `@react-navigation/native` (v7.1.18), `@react-navigation/bottom-tabs` (v7.5.0), `@react-navigation/native-stack` (v7.3.26)
-- **Data Fetching**: `@tanstack/react-query` (v5.100.14) (API caching, pagination, error states)
-- **State Management**: `@reduxjs/toolkit` (v2.9.2), `react-redux` (v9.2.0)
-- **Offline Database**: `@op-engineering/op-sqlite` (v16.2.0) (High-performance native SQLite for favorites)
-- **Animations**: React Native `Animated` API, `react-native-reanimated` (v4.3.0)
-- **Networking**: `axios` (v1.13.1), `@react-native-community/netinfo` (v11.5.2)
-- **UI & Media**: `@d11/react-native-fast-image` (v8.13.0), `lucide-react-native` (v1.17.0), `react-native-safe-area-context` (v5.6.1), `react-native-bootsplash` (v6.3.11)
+* Infinite scroll pagination
+* Debounced search (300ms)
+* Filter by status and gender
+* Progressive image loading
+* Skeleton loaders
+* Error & empty states
+
+## Character Details
+
+* Full character information
+* Episode appearances
+* Favourite toggle
+* Shared element-like transition animations
+
+## Episodes
+
+* Paginated episode listing
+* Grouped by season
+* Lazy-loaded character avatars
+
+## Locations
+
+* Browse all locations
+* View residents for each location
+
+## Favourites (Offline)
+
+* Stored locally using SQLite
+* Works without internet connection
+* Persistent across app restarts
+
+---
+
+# Tech Stack
+
+## Core
+
+* React 19.1.0
+* React Native 0.81.5
+* TypeScript
+
+## Navigation
+
+* @react-navigation/native
+* @react-navigation/bottom-tabs
+* @react-navigation/native-stack
+
+## State Management
+
+* @reduxjs/toolkit
+* react-redux
+
+## Data Fetching
+
+* @tanstack/react-query
+* axios
+
+## Offline Storage
+
+* @op-engineering/op-sqlite
+
+## Animations
+
+* React Native Animated API
+* react-native-reanimated
+
+## Networking & Utilities
+
+* @react-native-community/netinfo
+
+## UI & Media
+
+* @d11/react-native-fast-image
+* lucide-react-native
+* react-native-safe-area-context
+* react-native-bootsplash
+
+---
+
+# Project Structure
+
+```txt
+src/
+├── api/
+├── components/
+├── hooks/
+├── navigation/
+├── services/
+├── store/
+├── types/
+├── utils/
+└── features/
+    ├── characters/
+    ├── episodes/
+    ├── locations/
+    └── favourites/
+```
+
+---
+
+# Project Setup
+
+## Prerequisites
+
+* Node.js >= 18.x
+* Yarn
+* Ruby >= 3.2.0
+* Xcode
+* Android Studio
+
+---
+
+## Installation
+
+### 1. Install JavaScript Dependencies
+
+```sh
+yarn install
+```
+
+### 2. Install iOS Dependencies
+
+```sh
+cd ios
+bundle install
+bundle exec pod install
+cd ..
+```
+
+### 3. Run the Application
+
+#### Android
+
+```sh
+yarn android
+```
+
+#### iOS
+
+```sh
+yarn ios
+```
+
+---
+
+# Offline Support
+
+The application gracefully handles offline scenarios:
+
+* Favourite characters remain accessible offline
+* Network state detection using NetInfo
+* Retry mechanisms for failed requests
+* Proper empty and error state handling
+
+---
+
+# New Architecture
+
+This project uses React Native's New Architecture:
+
+* Fabric Renderer
+* TurboModules
+
+Enabled via:
+
+```properties
+newArchEnabled=true
+```
+
+---
+
+# API Reference
+
+Rick and Morty Public API:
+https://rickandmortyapi.com/api
+
+---
+
+# Author
+
+Developed by:
+https://github.com/wadekar9

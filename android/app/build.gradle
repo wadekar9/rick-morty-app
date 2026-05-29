@@ -117,6 +117,14 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.caverock:androidsvg-aar:1.4'
+    }
+    exclude group: 'com.caverock', module: 'androidsvg'
+}
+
+
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")

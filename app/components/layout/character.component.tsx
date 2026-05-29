@@ -27,7 +27,7 @@ const Character: React.FC<CharacterProps> = ({ theme, character }) => {
     return (
         <Pressable
             style={styles.container}
-            onPress={() => appStackNavigationRef.current?.navigate(EStackScreens.CHARACTER_DETAIL, { character: JSON.stringify(character) })}
+            onPress={() => appStackNavigationRef.current?.navigate(EStackScreens.CHARACTER_DETAIL, { id: character.id })}
         >
             <View style={styles.image}>
                 <BaseImage

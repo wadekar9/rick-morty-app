@@ -11,16 +11,19 @@ import { ChevronLeft, Heart } from 'lucide-react-native'
 import { StatusBadge } from '$components/layout'
 import { ICharacter } from '$types/data.types'
 import { toggleFavourite } from '$store/actions/favourite.actions'
+import { useCharacter } from '$hooks/modules'
+import { LoadingIndicatorPage } from '$components/pages'
 
 const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DETAIL>> = ({ navigation, route }) => {
 
     const { colors, theme, insets } = useAppTheme();
     const styles = styling(theme, insets);
-    const character: ICharacter = JSON.parse(route.params.character);
+    const { id } = route.params;
 
+    const { data: character, isLoading } = useCharacter(id);
     const dispatch = useAppDispatch();
     const favourites = useAppSelector((state) => state.favourites) || [];
-    const isFavourite = favourites.some((fav: ICharacter) => fav.id === character.id);
+    const isFavourite = favourites.some((fav: ICharacter) => fav.id === character?.id);
 
     return (
         <ThemedView>
@@ -38,7 +41,7 @@ const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DET
                     />
 
                     <View style={styles.statusWrapper}>
-                        <StatusBadge theme={theme} status={character?.status} />
+                        <StatusBadge theme={theme} status={character?.status || 'unknown'} />
                     </View>
                 </View>
 
@@ -93,7 +96,7 @@ const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DET
                     </IconButton>
                     <IconButton
                         style={styles.headerAction}
-                        onPress={() => dispatch(toggleFavourite(character))}
+                        onPress={() => character && dispatch(toggleFavourite(character))}
                     >
                         <Heart
                             width={moderateScale(24)}
@@ -104,6 +107,8 @@ const CharacterDetails: React.FC<AppStackScreenProps<EStackScreens.CHARACTER_DET
                     </IconButton>
                 </View>
             </ScrollView>
+
+            {isLoading && <LoadingIndicatorPage />}
         </ThemedView>
     );
 };

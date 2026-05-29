@@ -3,7 +3,7 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 import { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 export type AppStackParamsList = {
-    [EStackScreens.CHARACTER_DETAIL]: { character: string };
+    [EStackScreens.CHARACTER_DETAIL]: { id: number };
     [EStackScreens.BOTTOM_TAB_NAVIGATOR]: undefined;
 }
 

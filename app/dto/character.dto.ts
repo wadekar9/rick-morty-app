@@ -12,6 +12,8 @@ export interface ICharacterApiResponseDto {
     readonly results: ICharacter[];
 }
 
+export interface ISingleCharacterApiResponseDto extends ICharacter { }
+
 interface Info {
     readonly count: number;
     readonly pages: number;

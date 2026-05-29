@@ -32,7 +32,7 @@ const AppStackNavigator = () => {
                 <AppStack.Screen name={EStackScreens.CHARACTER_DETAIL}>
                     {(props) => (
                         <Suspense fallback={<ScreenFallback />}>
-                            <StackRoutes.CharacterDetails {...props as any} />
+                            <StackRoutes.CharacterDetails {...props} />
                         </Suspense>
                     )}
                 </AppStack.Screen>

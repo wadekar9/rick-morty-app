@@ -27,7 +27,7 @@ const EmptyFavouritesStatePage = () => {
   )
 }
 
-export default EmptyFavouritesStatePage;
+export default React.memo(EmptyFavouritesStatePage);
 
 const styling = (theme: ITheme) => StyleSheet.create({
   container: {

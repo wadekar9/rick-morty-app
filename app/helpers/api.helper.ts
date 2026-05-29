@@ -32,7 +32,7 @@ export const setupInterceptorsTo = (axiosInstance: AxiosInstance) => {
     return axiosInstance;
 };
 
-export const convertToFormData = <T extends Record<string, any>>(data: T): FormData => {
+export const convertToFormData = <T extends Record<string, string | number | boolean | object>>(data: T): FormData => {
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
@@ -52,12 +52,14 @@ export const convertToFormData = <T extends Record<string, any>>(data: T): FormD
     return formData;
 };
 
-export const convertToQueryParams = (params: Record<string, any>) => {
-
+export const convertToQueryParams = <T extends object>(params: T) => {
     const keyValuePairs = [];
     for (const key in params) {
-        if (encodeURIComponent(params[key])) {
-            keyValuePairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(params[key]));
+        if (Object.prototype.hasOwnProperty.call(params, key)) {
+            const value = params[key as keyof T];
+            if (value !== undefined && value !== null && value !== '') {
+                keyValuePairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(String(value)));
+            }
         }
     }
     return keyValuePairs.join('&');

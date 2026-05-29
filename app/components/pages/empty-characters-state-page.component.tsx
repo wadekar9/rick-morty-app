@@ -27,7 +27,7 @@ const EmptyCharactersStatePage = () => {
     )
 }
 
-export default EmptyCharactersStatePage;
+export default React.memo(EmptyCharactersStatePage);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     container: {

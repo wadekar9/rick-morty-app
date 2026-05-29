@@ -18,8 +18,8 @@ export const getFavourites = async (): Promise<ICharacter[]> => {
 
         if (rows && rows.length > 0) {
             for (let i = 0; i < rows.length; i++) {
-                const row = typeof (rows as any).item === 'function' ? (rows as any).item(i) : (rows as any)[i];
-                if (row && row.character) {
+                const row = rows[i];
+                if (row && typeof row.character === 'string') {
                     chars.push(JSON.parse(row.character));
                 }
             }

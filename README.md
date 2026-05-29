@@ -105,20 +105,20 @@ https://limewire.com/d/3iXsV#5aOuGJeqkA
 # Project Structure
 
 ```txt
-src/
-├── api/
-├── components/
-├── hooks/
-├── navigation/
-├── services/
-├── store/
-├── types/
-├── utils/
-└── features/
-    ├── characters/
-    ├── episodes/
-    ├── locations/
-    └── favourites/
+app/
+├── api/                # API clients, endpoints, axios configuration
+├── assets/             # Fonts, images, icons, static assets
+├── components/         # Reusable shared UI components
+├── constants/          # App-wide constants and enums
+├── context/            # React Context providers
+├── dto/                # Data transfer object definitions
+├── helpers/            # Helper functions and reusable logic
+├── hooks/              # Custom React hooks
+├── navigation/         # Navigation stacks, tabs, and routes
+├── screens/            # Application screens
+├── store/              # Redux store, slices, middleware
+├── types/              # Global TypeScript types/interfaces
+├── utils/              # Utility functions
 ```
 
 ---

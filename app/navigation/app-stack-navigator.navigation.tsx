@@ -27,7 +27,7 @@ const AppStackNavigator = () => {
         <NavigationContainer
             ref={appStackNavigationRef}
         >
-            <AppStack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
+            <AppStack.Navigator screenOptions={{ headerShown: false }}>
                 <AppStack.Screen name={EStackScreens.BOTTOM_TAB_NAVIGATOR} component={BottomTabNavigator} />
                 <AppStack.Screen name={EStackScreens.CHARACTER_DETAIL}>
                     {(props) => (

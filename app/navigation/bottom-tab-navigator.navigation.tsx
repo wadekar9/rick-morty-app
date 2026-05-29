@@ -33,7 +33,7 @@ const BottomTabNavigator: React.FC<AppStackScreenProps<EStackScreens.BOTTOM_TAB_
                 name={EBottomScreens.CHARACTERS}
                 component={BottomTabsRoutes.Characters}
                 options={{
-                    tabBarIcon: (props) => <UsersRound size={props.size} color={props.color} />
+                    tabBarIcon: (props) => <UsersRound size={props.size} color={props.color} fill={props.focused ? props.color : 'none'} />
                 }}
             />
             <BottomTab.Screen
@@ -54,7 +54,7 @@ const BottomTabNavigator: React.FC<AppStackScreenProps<EStackScreens.BOTTOM_TAB_
                 name={EBottomScreens.FAVOURITES}
                 component={BottomTabsRoutes.Favourites}
                 options={{
-                    tabBarIcon: (props) => <Heart size={props.size} color={props.color} />
+                    tabBarIcon: (props) => <Heart size={props.size} color={props.color} fill={props.focused ? props.color : 'none'} />
                 }}
             />
         </BottomTab.Navigator>

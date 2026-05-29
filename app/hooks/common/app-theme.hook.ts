@@ -16,13 +16,12 @@ export const useAppTheme = () => {
         throw new Error('useAppTheme must be used within an AppThemeProvider');
     }
 
-    const { changeTheme, theme, selectedTheme } = context;
+    const { changeTheme, theme } = context;
 
     return useMemo(() => ({
         changeTheme,
         theme,
-        selectedTheme,
         colors: COLORS[theme],
         insets,
-    }), [changeTheme, theme, selectedTheme, insets]);
+    }), [changeTheme, theme, insets]);
 };

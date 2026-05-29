@@ -1,4 +1,4 @@
-import { Animated, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { moderateScale } from '$constants/styles.constants'
 import { COLORS } from '$constants/colors.constants'
@@ -24,10 +24,10 @@ const TabHeader: React.FC<TabHeaderProps> = ({ theme, headerText = 'HeaderText',
     const styles = styling(theme);
 
     return (
-        <Animated.View style={styles.container}>
+        <View style={styles.container}>
             <ThemeText>{headerText}</ThemeText>
             {hasSearchBar && <BaseSearchBar onPressFilter={onPressFilter} onChange={onChangeSearch} placeholder='Search...' />}
-        </Animated.View>
+        </View>
     )
 }
 
